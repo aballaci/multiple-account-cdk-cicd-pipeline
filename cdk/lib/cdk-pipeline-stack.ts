@@ -39,7 +39,7 @@ export class CdkPipelineStack extends Stack {
       }
     ])
 
-    const githubOrg = process.env.GITHUB_ORG || "kevasync";
+    const githubOrg = process.env.GITHUB_ORG || "aballaci";
     const githubRepo = process.env.GITHUB_REPO || "multiple-account-cdk-cicd-pipeline";
     const githubBranch = process.env.GITHUB_BRANCH || "main";
     const devAccountId = process.env.DEV_ACCOUNT_ID || "637423573379";
