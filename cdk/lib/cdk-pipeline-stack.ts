@@ -42,11 +42,11 @@ export class CdkPipelineStack extends Stack {
     const githubOrg = process.env.GITHUB_ORG || "kevasync";
     const githubRepo = process.env.GITHUB_REPO || "multiple-account-cdk-cicd-pipeline";
     const githubBranch = process.env.GITHUB_BRANCH || "main";
-    const devAccountId = process.env.DEV_ACCOUNT_ID || "undefined";
-    const stgAccountId = process.env.STG_ACCOUNT_ID || "undefined";
-    const prdAccountId = process.env.PRD_ACCOUNT_ID || "undefined";
-    const primaryRegion = process.env.PRIMARY_REGION || "us-west-2";
-    const secondaryRegion = process.env.SECONDARY_REGION || "us-east-1";
+    const devAccountId = process.env.DEV_ACCOUNT_ID || "637423573379";
+    // const stgAccountId = process.env.STG_ACCOUNT_ID || "undefined";
+    // const prdAccountId = process.env.PRD_ACCOUNT_ID || "891377223543";
+    const primaryRegion = process.env.PRIMARY_REGION || "eu-central-1";
+    // const secondaryRegion = process.env.SECONDARY_REGION || "us-east-1";
 
     const pipeline = new CodePipeline(this, "CDKPipeline", {
       crossAccountKeys: true,
@@ -65,24 +65,24 @@ export class CdkPipelineStack extends Stack {
       env: { account: devAccountId, region: primaryRegion }
     });
     
-    const qa = new AppStage(this, "qa", {
-      env: { account: devAccountId, region: secondaryRegion }
-    });
+    // const qa = new AppStage(this, "qa", {
+    //   env: { account: devAccountId, region: secondaryRegion }
+    // });
     
-    const stg = new AppStage(this, "stg", {
-      env: { account: stgAccountId, region: primaryRegion }
-    });
+    // const stg = new AppStage(this, "stg", {
+    //   env: { account: stgAccountId, region: primaryRegion }
+    // });
     
     devQaWave.addStage(dev);
-    devQaWave.addStage(qa);
-    devQaWave.addStage(stg);
+    // devQaWave.addStage(qa);
+    // devQaWave.addStage(stg);
 
-    const primaryRdsRegionWave = pipeline.addWave("PROD-Deployment", {
-      pre: [new ManualApprovalStep("ProdManualApproval")]
-    });
-    const prdPrimary = new AppStage(this, "prd-primary", {
-      env: { account: prdAccountId, region: primaryRegion }
-    });
-    primaryRdsRegionWave.addStage(prdPrimary);
+    // const primaryRdsRegionWave = pipeline.addWave("PROD-Deployment", {
+    //   pre: [new ManualApprovalStep("ProdManualApproval")]
+    // });
+    // const prdPrimary = new AppStage(this, "prd-primary", {
+    //   env: { account: prdAccountId, region: primaryRegion }
+    // });
+    // primaryRdsRegionWave.addStage(prdPrimary);
   }
 }

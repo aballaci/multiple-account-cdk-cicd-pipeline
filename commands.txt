@@ -1,0 +1,17 @@
+git remote -v
+git remote add origin git@github.com:aballaci/multiple-account-cdk-cicd-pipeline.git
+
+
+aws sts get-caller-identity
+
+export AWS_PROFILE=cdk-pipe-usr
+
+bootstrap accounts:
+
+cdk bootstrap --trust 533267403041 --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess aws://637423573379/eu-central-1
+
+
+
+sbk-cdk-dev: 637423573379  
+cdk-pipeline: 533267403041
+cdk-prod:
