@@ -8,7 +8,7 @@ export AWS_PROFILE=cdk-pipe-usr
 export AWS_PROFILE=sbk-cdk-dev
 bootstrap accounts:
 
-cdk bootstrap aws://211125352266/eu-central-1 --trust 533267403041 --cloudformation-execution-policies "arn:aws:iam::aws:policy/AdministratorAccess" aws://211125352266/eu-central-1
+cdk bootstrap aws://533267403041/eu-central-1 --trust 533267403041 --cloudformation-execution-policies "arn:aws:iam::aws:policy/AdministratorAccess" 
 
 
 
@@ -18,4 +18,4 @@ sbk-cdk-prod: 211125352266
 
 aws sts assume-role --role-arn "arn:aws:iam::211125352266:role/CdkDeployApp" --role-session-name "cdk-pipe"
 
-github-token: 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
+github-token: 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
