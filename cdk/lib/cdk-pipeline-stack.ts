@@ -44,7 +44,7 @@ export class CdkPipelineStack extends Stack {
     const githubBranch = process.env.GITHUB_BRANCH || "main";
     const devAccountId = process.env.DEV_ACCOUNT_ID || "637423573379";
     // const stgAccountId = process.env.STG_ACCOUNT_ID || "undefined";
-    // const prdAccountId = process.env.PRD_ACCOUNT_ID || "891377223543";
+    const prdAccountId = process.env.PRD_ACCOUNT_ID || "211125352266";
     const primaryRegion = process.env.PRIMARY_REGION || "eu-central-1";
     // const secondaryRegion = process.env.SECONDARY_REGION || "us-east-1";
 
@@ -77,12 +77,12 @@ export class CdkPipelineStack extends Stack {
     // devQaWave.addStage(qa);
     // devQaWave.addStage(stg);
 
-    // const primaryRdsRegionWave = pipeline.addWave("PROD-Deployment", {
-    //   pre: [new ManualApprovalStep("ProdManualApproval")]
-    // });
-    // const prdPrimary = new AppStage(this, "prd-primary", {
-    //   env: { account: prdAccountId, region: primaryRegion }
-    // });
-    // primaryRdsRegionWave.addStage(prdPrimary);
+    const primaryRdsRegionWave = pipeline.addWave("PROD-Deployment", {
+      pre: [new ManualApprovalStep("ProdManualApproval")]
+    });
+    const prdPrimary = new AppStage(this, "prd-primary", {
+      env: { account: prdAccountId, region: primaryRegion }
+    });
+    primaryRdsRegionWave.addStage(prdPrimary);
   }
 }
