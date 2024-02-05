@@ -18,3 +18,4 @@ sbk-cdk-prod: 211125352266
 
 aws sts assume-role --role-arn "arn:aws:iam::211125352266:role/CdkDeployApp" --role-session-name "cdk-pipe"
 
+github-token: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

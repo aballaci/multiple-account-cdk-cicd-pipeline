@@ -43,10 +43,8 @@ export class CdkPipelineStack extends Stack {
     const githubRepo = process.env.GITHUB_REPO || "multiple-account-cdk-cicd-pipeline";
     const githubBranch = process.env.GITHUB_BRANCH || "main";
     const devAccountId = process.env.DEV_ACCOUNT_ID || "637423573379";
-    // const stgAccountId = process.env.STG_ACCOUNT_ID || "undefined";
     const prdAccountId = process.env.PRD_ACCOUNT_ID || "211125352266";
     const primaryRegion = process.env.PRIMARY_REGION || "eu-central-1";
-    // const secondaryRegion = process.env.SECONDARY_REGION || "us-east-1";
 
     const pipeline = new CodePipeline(this, "CDKPipeline", {
       crossAccountKeys: true,
@@ -64,18 +62,8 @@ export class CdkPipelineStack extends Stack {
     const dev = new AppStage(this, "dev", {
       env: { account: devAccountId, region: primaryRegion }
     });
-    
-    // const qa = new AppStage(this, "qa", {
-    //   env: { account: devAccountId, region: secondaryRegion }
-    // });
-    
-    // const stg = new AppStage(this, "stg", {
-    //   env: { account: stgAccountId, region: primaryRegion }
-    // });
-    
+       
     devQaWave.addStage(dev);
-    // devQaWave.addStage(qa);
-    // devQaWave.addStage(stg);
 
     const primaryRdsRegionWave = pipeline.addWave("PROD-Deployment", {
       pre: [new ManualApprovalStep("ProdManualApproval")]
